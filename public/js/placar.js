@@ -1,3 +1,5 @@
+$("#botao-placar").click(mostraPlacar);
+
 function inserePlacar() {
 	var corpoTabela = $(".placar").find("tbody");
 	var usuario = "Israel"
@@ -7,6 +9,16 @@ function inserePlacar() {
 	linha.find(".botao-remover").click(removeLinha);
 
 	corpoTabela.prepend(linha);
+
+	$(".placar").stop().slideDown(500);
+	scrollPlacar();
+}
+
+function scrollPlacar() {
+	var posicaoPlacar = $(".placar").offset().top;
+	$("body").animate({
+		scrollTop : posicaoPlacar+"px"
+	}, 1000);
 }
 
 function novaLinha(usuario, numPalavras) {
@@ -30,5 +42,13 @@ function novaLinha(usuario, numPalavras) {
 function removeLinha(event) {
 	event.preventDefault();
 	// Sobe na hierarquia (this = link -> parent() = <td> -> parent() = <tr>)
-	$(this).parent().parent().remove();
+	var linha = $(this).parent().parent();
+	linha.fadeOut(500);
+	setTimeout(function() {
+		linha.remove();
+	}, 500)
+}
+
+function mostraPlacar() {
+	$(".placar").stop().slideToggle(500);
 }
