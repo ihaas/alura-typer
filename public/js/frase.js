@@ -34,7 +34,7 @@ function buscaFrase() {
         $("#erro").toggle();
         setTimeout(function(){
             $("#erro").toggle();
-    },2000);
+        },2000);
     })
     .always(function(){
         $("#spinner").toggle();
